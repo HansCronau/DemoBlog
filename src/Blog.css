@@ -26,7 +26,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }*/
-
+/*
 .Blog-container {
     display: block;
     display: grid;
@@ -54,5 +54,5 @@
 .Blog-sidebar .ui.search .ui.input {
     width: 100%;
 }
-
+*/
 

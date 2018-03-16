@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 function BlogArticle(props) {
     return (
         <Segment className="BlogArticle-article">
-            <Container text>
+            <Container>
                 <Header as="h2">{props.articleData.heading}</Header>
                 <p>
                     <Moment format="LL" className="BlogArticle-date">{props.articleData.date}</Moment>

@@ -20,8 +20,8 @@ class Blog extends Component {
         super();
         this.state = {
             articles: [],
-            articleElements: [],
             isLoading: true,
+            pageNumber: 1,
         };
     }
 
@@ -47,16 +47,18 @@ class Blog extends Component {
 
     render() {
         return (
-            <Segment basic className='Blog-container'>
-                <Segment basic className='Blog-articles' >
-                    {this.state.articles.map( article =>
-                        <BlogArticle key={article.id} articleData={article} />
-                    )}
-                    <Loader active={this.state.isLoading} />
-                </Segment>
-                <div className='Blog-sidebar'>
-                    <BlogSearch articlesData={this.state.articles} />
-                </div>
+            <Segment basic>
+                <Grid stackable columns={2}>
+                    <Grid.Column width={4}>
+                        <BlogSearch articlesData={this.state.articles} />
+                    </Grid.Column>
+                    <Grid.Column width={12}>
+                        {this.state.articles.map( article =>
+                            <BlogArticle key={article.id} articleData={article} />
+                        )}
+                        <Loader active={this.state.isLoading} />
+                    </Grid.Column>
+                </Grid>
             </Segment>
         )
     }
