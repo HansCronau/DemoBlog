@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+body #root {
+    height: 100%;
+}
+
+body .App-container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: 50px 1fr 30px;
+}
+
+header {
+    /*background: #00e489;*/
+    grid-area: header;
+}
+
+.main {
+    grid-area: main;
+}
+
+footer {
+    background: #00e489;
+    grid-area: footer;
+}

@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -25,4 +25,34 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}*/
+
+.Blog-container {
+    display: block;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 1em;
+    padding: 1em;
 }
+
+.Blog-container .Blog-articles {
+    margin-top: 0;
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+
+}
+
+.Blog-container .Blog-sidebar {
+    display: block;
+    align-content: center;
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 1em;
+}
+
+.Blog-sidebar .ui.search .ui.input {
+    width: 100%;
+}
+
+
