@@ -66,7 +66,7 @@ class Blog extends Component {
         const articleIndex = this.state.articleURLs.indexOf(path)
         return (
             <Segment basic className='Blog-fullHeight'>
-                <Grid stackable stretched columns={2} className='Blog-fullHeight'>
+                <Grid stackable columns={2} className='Blog-fullHeight'>
                     <Grid.Column width={4}>
                         <BlogSearch articlesData={this.state.articles} />
                     </Grid.Column>

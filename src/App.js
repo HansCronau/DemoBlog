@@ -29,7 +29,7 @@ class App extends Component {
     render() {
         console.log(
             'HansCronau: Hi. Inspecting the console?\n' +
-            'HansCronau: Warnings below are caused by known bugs in a third party component (Semntic UI React).'
+            'HansCronau: Warnings below are caused by bugs in a third party component (Semntic UI React).'
         )
         return (
             <Router>

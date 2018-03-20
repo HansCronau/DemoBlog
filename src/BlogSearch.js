@@ -36,6 +36,8 @@ class BlogSearch extends Component {
     }
 
     resultRenderer = article => (
+        // Fun fact: Search component has at this point overwritten acticle.id with article's index in results.
+        //           Note that this is not what causes the unique key warning (see console when searching).
         <Search.Result
             title={article.heading}
             description={moment(article.date).format('LL')}
