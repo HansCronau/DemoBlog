@@ -54,7 +54,7 @@ class Blog extends Component {
             // Precalculate article URLs for quick matching.
             this.setState({
                 articleURLs: this.state.articles.map(
-                    article => articleURL(article)
+                    article => this.props.match.path + '/' + articleURL(article)
                 ),
                 isLoading: false,
             })
@@ -62,6 +62,8 @@ class Blog extends Component {
     }
 
     render() {
+        const path = this.props.location.pathname
+        const articleIndex = this.state.articleURLs.indexOf(path)
         return (
             <Segment basic className='Blog-fullHeight'>
                 <Grid stackable stretched columns={2} className='Blog-fullHeight'>
@@ -69,14 +71,12 @@ class Blog extends Component {
                         <BlogSearch articlesData={this.state.articles} />
                     </Grid.Column>
                     <Grid.Column width={12} className='Blog-fullHeight' >
-                        <Switch>
-                            <Route exact path='/blog'>
+                        {
+                            articleIndex >= 0 ?
+                                <BlogArticle articleData={this.state.articles[articleIndex]} />
+                            :
                                 <BlogArticlesOverview articlesData={this.state.articles} />
-                            </Route>
-                            <Route exact path='/blog/:articleDate(\d{4}-\d{2}-\d{2})/:articleName'>
-                                {this.state.isLoading ? null : <BlogArticle articleData={this.state.articles[0]} />}
-                            </Route>
-                        </Switch>
+                        }
                         <Loader active={this.state.isLoading} />
                     </Grid.Column>
                 </Grid>
