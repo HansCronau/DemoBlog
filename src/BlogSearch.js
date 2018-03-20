@@ -1,7 +1,9 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import { Search } from 'semantic-ui-react'
 import moment from 'moment'
+import articleURL from './articleURL.js'
 
 class BlogSearch extends Component {
     componentWillMount() {
@@ -10,7 +12,10 @@ class BlogSearch extends Component {
 
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-    handleResultSelect = (e, { result }) => this.setState({ value: result.title })
+    handleResultSelect = (e, { result }) => {
+        this.props.history.push('/blog/' + articleURL(result))
+        this.resetComponent()
+    }
 
     handleSearchChange = (e, { value }) => {
         this.setState({ isLoading: true, value })
@@ -62,4 +67,4 @@ class BlogSearch extends Component {
     }
 }
 
-export default BlogSearch
+export default withRouter(BlogSearch)
