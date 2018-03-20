@@ -4,6 +4,8 @@ html, body {
 
 body {
     margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 160%;
 }
 
 body #root {
@@ -15,19 +17,48 @@ body .App-container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: "header" "main" "footer";
-    grid-template-rows: 50px 1fr 30px;
+    grid-template-rows: 120px 1fr 220px;
 }
 
 header {
-    /*background: #00e489;*/
+    padding: 15px;
     grid-area: header;
 }
 
-.main {
+header .App-companyLogo {
+    margin: 35px 0 0 10px;
+    max-width: 130px;
+}
+
+header nav {
+    margin-top: 39px;
+    width: 630px;
+    float: right;
+    font-size: 1.1em;
+}
+
+header nav .Header-loginButton {
+    background: #00E489;
+    color: white;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: -5px;
+}
+
+main {
     grid-area: main;
+    padding: 0 15px;
 }
 
 footer {
-    background: #00e489;
     grid-area: footer;
+    padding: 20px;
+    background: #00e489;
+    color: white;
+}
+
+footer .Footer-copyright {
+    width: 100%;
+    text-align: center;
 }

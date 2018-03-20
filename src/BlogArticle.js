@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react'
 import Moment from 'react-moment'
-import { withRouter } from 'react-router'
 import articleURL from './articleURL.js'
 import './BlogArticle.css'
 

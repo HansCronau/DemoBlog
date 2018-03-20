@@ -1,26 +1,28 @@
 import _ from 'lodash'
 import faker from 'faker'
 import React, { Component } from 'react'
-import { Grid, Segment, Transition, Loader } from 'semantic-ui-react'
 import { withRouter } from 'react-router'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { Grid, Segment, Loader } from 'semantic-ui-react'
 import BlogArticlesOverview from './BlogArticlesOverview.js'
 import BlogArticle from './BlogArticle.js'
 import BlogSearch from './BlogSearch.js'
 import articleURL from './articleURL.js'
 import './Blog.css'
 
-const nrDemoArticles = 3
-
 // For demoing/testing with more than one article.
-const demoArticles = _.times(nrDemoArticles, () => ({
-    id: faker.random.alphaNumeric(16),
-    heading: faker.company.companyName() + ' chooses EcoChain',
-    date: faker.date.future(2).toISOString(),
-    summary: faker.lorem.sentences(3),
-    body: faker.lorem.paragraphs(3),
-}))
+const generateDemoArticles = nrOfArticles => 
+    _.times(nrOfArticles, () => ({
+        id: faker.random.alphaNumeric(16),
+        heading: faker.company.companyName() + ' chooses EcoChain',
+        date: faker.date.future(2).toISOString(),
+        summary: faker.lorem.sentences(3),
+        body: faker.lorem.paragraphs(3),
+    }))
 
+
+// Blog component assumes:
+// - REST API resembling https://virtserver.swaggerhub.com/ecochainadmin/Blog/1.0.0/articles
+// - Articles have unique date+heading combinations.
 class Blog extends Component {
     
     constructor() {
@@ -43,17 +45,17 @@ class Blog extends Component {
         fetch(this.props.articlesURL, {headers: {'Accept': 'application/json'}})
         .then(response => {
             return response.json()
+            // TODO(HansCronau): Check if json adheres to expected format.
         })
         .then(data => {
             // Add fake articles for demonstrational purposes.
-            this.setState({
-                articles: _.concat(data, demoArticles),
-            })
+            return this.props.nrDemoArticles ? _.concat(data, generateDemoArticles(this.props.nrDemoArticles)) : data
         })
         .then(data => {
             // Precalculate article URLs for quick matching.
             this.setState({
-                articleURLs: this.state.articles.map(
+                articles: data,
+                articleURLs: data.map(
                     article => this.props.match.path + '/' + articleURL(article)
                 ),
                 isLoading: false,
