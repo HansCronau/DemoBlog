@@ -1,0 +1,8 @@
+.BlogArticle-date {
+    margin: 1em 0;
+    color: gray;
+}
+
+.BlogArticle-summary, .BlogArticle-body {
+    margin: 1em 0;
+}

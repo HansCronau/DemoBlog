@@ -60,4 +60,4 @@ class BlogSearch extends Component {
     }
 }
 
-export default BlogSearch;
+export default BlogSearch

@@ -1,97 +1,83 @@
 import _ from 'lodash'
 import faker from 'faker'
-import React, { Component } from 'react';
-import './Blog.css';
-import BlogArticle from './BlogArticle.js';
-import BlogSearch from './BlogSearch.js';
-import { Container, Grid, Pagination, Segment, Transition, Loader } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { Grid, Segment, Transition, Loader } from 'semantic-ui-react'
+import { withRouter } from 'react-router'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import BlogArticlesOverview from './BlogArticlesOverview.js'
+import BlogArticle from './BlogArticle.js'
+import BlogSearch from './BlogSearch.js'
+import articleURL from './articleURL.js'
+import './Blog.css'
+
+const nrDemoArticles = 3
 
 // For demoing/testing with more than one article.
-const fakeArticles = _.times(10, () => ({
+const demoArticles = _.times(nrDemoArticles, () => ({
     id: faker.random.alphaNumeric(16),
-    heading: faker.company.companyName() + ' partners with EcoChain',
-    date: faker.date.recent().toString(),
+    heading: faker.company.companyName() + ' chooses EcoChain',
+    date: faker.date.future(2).toISOString(),
     summary: faker.lorem.sentences(3),
     body: faker.lorem.paragraphs(3),
 }))
 
-const Centered = ({children}) =>
-    <Grid columns='equal'>
-        <Grid.Column />
-        <Grid.Column>
-            {children}
-        </Grid.Column>
-        <Grid.Column />
-    </Grid>
-
 class Blog extends Component {
     
     constructor() {
-        super();
+        super()
         this.state = {
             articles: [],
+            articleURLs: [],
             isLoading: true,
-            activePage: 1,
-            articlesPerPage: 5,
-        };
+        }
     }
 
     componentDidMount() {
-        // Demo functionality
-        if(!this.props.articleURL) {
-            this.setState({articles: fakeArticles})
+        // Check if articlesURL prop is set. Blog component can't work without it.
+        if(!this.props.articlesURL) {
+            console.error('Blog component missing property \'articlesURL\' linking to REST API.')
             return
         }
 
-        // Normal functionality
-        fetch(this.props.articleURL, {headers: {'Accept': 'application/json'}})
+        // Fetch articles from REST API
+        fetch(this.props.articlesURL, {headers: {'Accept': 'application/json'}})
         .then(response => {
             return response.json()
         })
         .then(data => {
+            // Add fake articles for demonstrational purposes.
             this.setState({
-                articles: _.concat(data, fakeArticles),
+                articles: _.concat(data, demoArticles),
+            })
+        })
+        .then(data => {
+            // Precalculate article URLs for quick matching.
+            this.setState({
+                articleURLs: this.state.articles.map(
+                    article => articleURL(article)
+                ),
                 isLoading: false,
             })
         })
     }
 
-    handlePaginationChange = (e, {activePage}) => this.setState({activePage});
-
-    pagination() {
-        const {articles, isLoading, activePage, articlesPerPage} = this.state;
-        return isLoading ? null : <Pagination
-            totalPages={_.ceil(articles.length/articlesPerPage)}
-            activePage={activePage}
-            siblingsRange={2}
-            firstItem={null}
-            lastItem={null}
-            onPageChange={this.handlePaginationChange}
-        />
-    }
-
     render() {
-        const {articles, isLoading, activePage, articlesPerPage} = this.state;
-        const firstArticle = (activePage-1)*articlesPerPage;
-        const lastArticle = firstArticle + articlesPerPage;
         return (
-            <Segment basic>
-                <Grid stackable stretched columns={2}>
+            <Segment basic className='Blog-fullHeight'>
+                <Grid stackable stretched columns={2} className='Blog-fullHeight'>
                     <Grid.Column width={4}>
-                        <BlogSearch articlesData={articles} />
+                        <BlogSearch articlesData={this.state.articles} />
                     </Grid.Column>
-                    <Grid.Column width={12}>
-                        {
-                            articles.slice(firstArticle, lastArticle)
-                            .map( article => <BlogArticle
-                                key={article.id}
-                                articleData={article}
-                            />)
-                        }
-                        <Centered>
-                            {this.pagination()}
-                        </Centered>
-                        <Loader active={isLoading} />
+                    <Grid.Column width={12} className='Blog-fullHeight' >
+                        <Switch>
+                            <Route exact path='/blog'>
+                                <BlogArticlesOverview articlesData={this.state.articles} />
+                            </Route>
+                            <Route exact path='/blog/:articleDate(\d{4}-\d{2}-\d{2})/:articleName'>
+                                {this.state.isLoading ? null : <BlogArticle articleData={this.state.articles[0]} />}
+                            </Route>
+                        </Switch>
+                        <Loader active={this.state.isLoading} />
                     </Grid.Column>
                 </Grid>
             </Segment>
@@ -99,4 +85,4 @@ class Blog extends Component {
     }
 }
 
-export default Blog;
+export default withRouter(Blog)

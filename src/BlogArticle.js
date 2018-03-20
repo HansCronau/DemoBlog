@@ -1,30 +1,58 @@
-import React from 'react';
-import './BlogArticle.css';
-import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
-import Moment from 'react-moment';
+import React, { Component } from 'react'
+import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react'
+import Moment from 'react-moment'
+import { withRouter } from 'react-router'
+import articleURL from './articleURL.js'
+import './BlogArticle.css'
 
-function BlogArticle(props) {
-    return (
-        <Segment className="BlogArticle-article">
+class BlogArticle extends Component {
+
+    readMore = () => this.props.history.push('/blog/' + articleURL(this.props.articleData))
+
+    articlesOverview = () => this.props.history.push('/blog')
+
+    render = () => (
+        <Segment
+            basic={this.props.summary ? false : true}
+            className="BlogArticle-article"
+        >
             <Container>
-                <Header as="h2">{props.articleData.heading}</Header>
+                <Header as="h2">{this.props.articleData.heading}</Header>
                 <p>
-                    <Moment format="LL" className="BlogArticle-date">{props.articleData.date}</Moment>
+                    <Moment format="LL" className="BlogArticle-date">{this.props.articleData.date}</Moment>
                 </p>
-                <div className="BlogArticle-summary">
-                    <p>{props.articleData.summary}</p>
-                </div>
-                <Button content='Read more' />
-                <div className="BlogArticle-body">
-                    <p>{props.articleData.body}</p>
-                </div>
-                <Button basic icon labelPosition='left'>
-                    <Icon name='left arrow' />
-                    Back to articles
-                </Button>
+                {this.props.summary ?
+                    <div>
+                        <div className="BlogArticle-summary">
+                            <p>{this.props.articleData.summary}</p>
+                        </div>
+                        <Button
+                            icon
+                            labelPosition='right'
+                            onClick={this.readMore}
+                        >
+                            <Icon name='right arrow' />
+                            Read more
+                        </Button>
+                    </div> :
+                    <div>
+                        <div className="BlogArticle-body">
+                            <p>{this.props.articleData.body}</p>
+                        </div>
+                        <Button
+                            basic
+                            icon
+                            labelPosition='left'
+                            onClick={this.articlesOverview}
+                        >
+                            <Icon name='left arrow' />
+                            Back to articles
+                        </Button>
+                    </div>
+                }
             </Container>
         </Segment>
     )
 }
 
-export default BlogArticle;
+export default withRouter(BlogArticle)
