@@ -12,18 +12,19 @@ const nrDemoArticles = 13;
 
 const Home = () => (
     <Segment basic>
-        <Header as="h1">Home</Header>
-        <p>
-            Visit our <Link to='/blog'>Blog</Link> for the latest developments.
-        </p>
         <Message info>
             <Message.Header>Welcome to the demo</Message.Header>
             <Message.List>
                 <Message.Item>This basic landing page was included to demonstrate URL-handling.</Message.Item>
+                <Message.Item>A dummy(!) header and footer were included to integrate with EcoChain's look and feel.</Message.Item>
+                <Message.Item>Follow the "Blog" link below to view the blog functionality.</Message.Item>
                 <Message.Item>Check the address bar while browsing to see how the URL changes.</Message.Item>
-                <Message.Item>A dummy header and footer are included for the look and feel.</Message.Item>
             </Message.List>
         </Message>
+        <Header as="h1">Home</Header>
+        <p>
+            Visit our <Link to='/blog'>Blog</Link> for the latest developments.
+        </p>
     </Segment>
 )
 
