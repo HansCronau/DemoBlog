@@ -2,6 +2,10 @@ EcoChain Blog
 =============
 
 I created this project early 2018 as an assessment for *EcoChain*.
+The goal was to create a blog with proper url handling, text snippets, and search functionality.
+
+I used the opportunity to get aquainted with software like Node and React, which were completely new to me at the time. (See "Software used".)
+While there is much I would do differently now (2019), the project does demonstrate my approach to new tech.
 
 
 Take it for a spin
@@ -35,7 +39,7 @@ Software used
 - Docker
 - Momentjs/React Moment
 - Nodejs
-- npm &Yarn
+- npm & Yarn
 - React
 - React Router
 - Semantic UI React
