@@ -10,7 +10,7 @@ import articleURL from './articleURL.js'
 import './Blog.css'
 
 // For demoing/testing with more than one article.
-const generateDemoArticles = nrOfArticles => 
+const generateDemoArticles = nrOfArticles =>
     _.times(nrOfArticles, () => ({
         id: faker.random.alphaNumeric(16),
         heading: faker.company.companyName() + ' chooses EcoChain',
@@ -24,7 +24,7 @@ const generateDemoArticles = nrOfArticles =>
 // - REST API resembling https://virtserver.swaggerhub.com/ecochainadmin/Blog/1.0.0/articles
 // - Articles have unique date+heading combinations.
 class Blog extends Component {
-    
+
     constructor() {
         super()
         this.state = {

@@ -20,7 +20,7 @@ const BlogPagination = (props) =>
     </Centered> : null
 
 class BlogArticlesOverview extends Component {
-    
+
     constructor(props) {
         super(props)
         this.state = {

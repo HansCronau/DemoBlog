@@ -48,7 +48,7 @@ class BlogSearch extends Component {
             description={moment(article.date).format('LL')}
         />
     )
-    
+
     render() {
         const { isLoading, value, results } = this.state
 

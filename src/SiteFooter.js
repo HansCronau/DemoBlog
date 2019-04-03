@@ -39,7 +39,7 @@ const SiteFooter = () => (
                 <div className='Footer-copyright'>&copy; Ecochain | Privacy | Voorwaarden | Sitemap | Powered by Hans</div>
             </Grid.Row>
         </Grid>
-        
+
     </footer>
 )
 
