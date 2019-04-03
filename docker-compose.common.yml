@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+
+  common:
+    image: node:11
+    volumes:
+      - .:/app
+    working_dir: /app

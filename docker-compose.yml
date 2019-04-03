@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+
+  dev:
+    extends:
+      file: docker-compose.common.yml
+      service: common
+    command: npm start
+    ports:
+      - 3000:3000
