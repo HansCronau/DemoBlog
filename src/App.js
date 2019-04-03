@@ -36,8 +36,6 @@ class App extends Component {
             'HansCronau: Hi. Inspecting the console?\n' +
             'HansCronau: Warnings below are caused by bugs in a third party component (Semntic UI React).'
         )
-        // Note: Component <Link> was replaced with <a> as a workaround.
-        //       Link removes prop className (which according to the docs it shouldn't).
         return (
             <Router>
                 <div className='App-container'>

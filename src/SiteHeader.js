@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import { Grid, Dropdown } from 'semantic-ui-react'
 
 const SiteHeader = () => (
     <header>
-        <a href='/' className='App-companyLogoLink'>
+        <Link to='/' className='App-companyLogoLink'>
             <img src='/images/logo.png' alt='Logo' className='App-companyLogo' />
-        </a>
+        </Link>
         <nav>
             <Grid columns='equal' verticalAlign='bottom'>
                 <Grid.Column>
@@ -21,7 +22,7 @@ const SiteHeader = () => (
                     Contact
                 </Grid.Column>
                 <Grid.Column>
-                    <a href='/' className='Header-loginButton'>Login</a>
+                    <Link to='/' className='Header-loginButton'>Login</Link>
                 </Grid.Column>
             </Grid>
         </nav>
