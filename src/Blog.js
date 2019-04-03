@@ -49,7 +49,7 @@ class Blog extends Component {
         })
         .then(data => {
             // Add fake articles for demonstrational purposes.
-            return this.props.nrDemoArticles ? _.concat(data, generateDemoArticles(this.props.nrDemoArticles)) : data
+            return this.props.nrDemoArticles ? data.concat(generateDemoArticles(this.props.nrDemoArticles)) : data
         })
         .then(data => {
             // Precalculate article URLs for quick matching.

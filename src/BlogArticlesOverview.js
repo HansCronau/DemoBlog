@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React, { Component } from 'react'
 import { Pagination } from 'semantic-ui-react'
 import BlogArticle from './BlogArticle.js'
@@ -45,7 +44,7 @@ class BlogArticlesOverview extends Component {
         const {activePage, articlesPerPage} = this.state
         const firstArticle = (activePage-1)*articlesPerPage
         const lastArticle = firstArticle + articlesPerPage
-        const totalPages = _.ceil(articlesData.length/articlesPerPage)
+        const totalPages = Math.ceil(articlesData.length/articlesPerPage)
 
         return <div>
             <BlogPagination

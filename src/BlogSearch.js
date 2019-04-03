@@ -33,10 +33,10 @@ class BlogSearch extends Component {
                 //TODO(HansCronau): Check if input is date and if article date is (within) given date.
             )}
 
-            this.setState({
+            this.setState((state, props) => ({
                 isLoading: false,
-                results: _.filter(this.props.articlesData, isMatch),
-            })
+                results: props.articlesData.filter(isMatch),
+            }))
         }, 500)
     }
 
