@@ -32,10 +32,6 @@ const EcoChainBlog = () => <Blog articlesURL={articlesURL} nrDemoArticles={nrDem
 
 class App extends Component {
     render() {
-        console.log(
-            'HansCronau: Hi. Inspecting the console?\n' +
-            'HansCronau: Warnings below are caused by bugs in a third party component (Semntic UI React).'
-        )
         return (
             <Router>
                 <div className='App-container'>
