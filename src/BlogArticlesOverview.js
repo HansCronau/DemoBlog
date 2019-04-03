@@ -12,7 +12,7 @@ const BlogPagination = (props) =>
         <Pagination
             totalPages={props.totalPages}
             activePage={props.activePage}
-            siblingsRange={defaultPaginationSibling}
+            siblingRange={defaultPaginationSibling}
             firstItem={null}
             lastItem={null}
             onPageChange={props.onPageChange}
